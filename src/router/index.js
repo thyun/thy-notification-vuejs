@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import DefaultLayout from '@/layouts/Default.vue'
+import HelloLayout from '@/layouts/Hello.vue'
 import Hello from '@/components/Hello'
 import TargetIndex from '@/components/TargetIndex'
 import TargetNew from '@/components/TargetNew'
@@ -12,22 +14,32 @@ export default new Router({
     {
       path: '/',
       name: 'Hello',
-      component: Hello
+      component: HelloLayout,
+      children: [
+        {
+          path: '',
+          component: Hello
+        }
+      ]
     },
     {
       path: '/targets',
-      name: 'TargetIndex',
-      component: TargetIndex
-    },
-    {
-      path: '/targets-new',
-      name: 'TargetNew',
-      component: TargetNew
-    },
-    {
-      path: '/targets-edit',
-      name: 'TargetEdit',
-      component: TargetEdit
+      name: 'Target',
+      component: DefaultLayout,
+      children: [
+        {
+          path: '',
+          component: TargetIndex
+        },
+        {
+          path: '/targets-new',
+          component: TargetNew
+        },
+        {
+          path: '/targets-edit',
+          component: TargetEdit
+        }
+      ]
     }
   ]
 })
